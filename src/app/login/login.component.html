@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="cont_new row" >
+    <div class="column box1">
+      <div>
+        <h3 class="heading">SIGN IN</h3>
+        <input class="inputbox" [(ngModel)]="username" placeholder="Username" name="username" required>
+        <input class="inputbox" [(ngModel)]="password" placeholder="Password" type="password" name="password" required>
+      </div>
+
+        <button class="btn" (click)="login()">LOGIN NOW ></button>
+    </div>
+    <!-- <div class="column box2">
+      <div>
+        <h3 class="heading1">DON'T HAVE AN ACCOUNT</h3>
+      </div>
+        <button class="btn2" (click)="signup()">SIGN UP ></button>
+    </div> -->
+  </div>
+  <!-- <mat-card-content>
+    <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center" class="cont">
+      <div fxLayout="column">
+        <mat-card>
+          <div>
+            <h3 class="heading">SIGN IN</h3>
+          </div>
+            <form class="example-form">
+              <table class="example-full-width" cellspacing="0">
+                <tr>
+                  <td>
+                    <input class="inputbox" [(ngModel)]="username" placeholder="Username" name="username" required>
+                  </td>
+                </tr>
+                <tr>
+                <td>
+                  <input class="inputbox" [(ngModel)]="password" placeholder="Password" type="password" name="password" required>
+               </td>
+              </tr></table>
+            </form>
+            <button (click)="login()" color="primary">Login</button>
+        </mat-card>
+      </div>
+      <div fxLayout="column">
+        <mat-card>
+        <h3>Don't have an account</h3>
+        <h1>SIGN UP</h1>
+      </mat-card> -->
+    <!-- </div> -->
+</div>
