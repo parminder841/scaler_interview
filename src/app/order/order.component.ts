@@ -34,17 +34,17 @@ export class OrderComponent implements OnInit {
       name: 'Ajay',
       date: '2022-03-13',
       start_time: '1 PM',
-      end_time: '2 PM'
+      end_time: '3 PM'
     },
     {
       name: 'Neha',
       date: '2022-03-13',
-      start_time: '2 PM',
+      start_time: '1 PM',
       end_time: '3 PM'
     },
     {
       name: 'Pulkit',
-      date: '2022-03-14',
+      date: '2022-03-13',
       start_time: '2 PM',
       end_time: '4 PM'
     }
@@ -58,7 +58,7 @@ export class OrderComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
-      var dtToday = new Date();
+    //  var dtToday = new Date();
     //   var month = dtToday.getMonth() + 1;
     //   var day = dtToday.getDate();
     //   var year = dtToday.getFullYear();
@@ -70,23 +70,7 @@ export class OrderComponent implements OnInit {
   getList() {
     this.service.getDetail().subscribe(res => {
       console.log(res);
-      this.orderlist = res;
-      Object.keys(this.orderlist.order).forEach( ele =>{
-        this.cost +=  this.orderlist.order[ele].USD;
-      })
-      this.totalRecords= this.orderlist.order.length();
     })
-
-
-  }
-
-  remove(item: any){
-    this.orderlist.order = this.orderlist.order.filter((value: any , index: number )=> index !== item);
-    this.cost = 0;
-    Object.keys(this.orderlist.order).forEach( ele =>{
-      this.cost +=  this.orderlist.order[ele].USD;
-    })
-    console.log(this.orderlist);
   }
 
   selectedTabValue(event: any){
@@ -112,32 +96,98 @@ export class OrderComponent implements OnInit {
     })
      console.log('New', this.NewItem)
   }
+
+  edit() {
+    (<HTMLInputElement>document.getElementById("edit_button")).style.display = "none";
+    (<HTMLInputElement>document.getElementById("save_button")).style.display = "inline";
+
+    var name = (<HTMLInputElement>document.getElementById("name_row"));
+    var date = (<HTMLInputElement>document.getElementById("date_row"));
+    var stime = (<HTMLInputElement>document.getElementById("stime_row"));
+    var etime = (<HTMLInputElement>document.getElementById("etime_row"));
+
+    var name_data = name.innerHTML;
+    var date_data = date.innerHTML;
+    var stime_data = stime.innerHTML;
+    var etime_data = etime.innerHTML;
+
+    name.innerHTML = "<input type='text' id='name_text' value='" + name_data + "'>";
+    date.innerHTML = "<input type='text' id='date_text' value='" + date_data + "'>";
+    stime.innerHTML = "<input type='text' id='stime_text' value='" + stime_data + "'>";
+    etime.innerHTML = "<input type='text' id='etime_text' value='" + etime_data + "'>";
+  }
+
+  save(){
+    var name_val=(<HTMLInputElement>document.getElementById("name_text")).value;
+    var date_val=(<HTMLInputElement>document.getElementById("date_text")).value;
+    var stime_val=(<HTMLInputElement>document.getElementById("stime_text")).value;
+    var etime_val=(<HTMLInputElement>document.getElementById("etime_text")).value;
+
+    (<HTMLInputElement>document.getElementById("name_row")).innerHTML=name_val;
+    (<HTMLInputElement>document.getElementById("date_row")).innerHTML=date_val;
+    (<HTMLInputElement>document.getElementById("stime_row")).innerHTML=stime_val;
+    (<HTMLInputElement>document.getElementById("etime_row")).innerHTML = etime_val;
+
+    (<HTMLInputElement>document.getElementById("save_button")).style.display="none";
+    (<HTMLInputElement>document.getElementById("edit_button")).style.display="inline";
+  }
+
+  delete(){
+    (<HTMLInputElement>document.getElementById("row")).outerHTML="";
+  }
+
+  edit_row(no: any) {
+    (<HTMLInputElement>document.getElementById("edit_button" + no)).style.display = "none";
+    (<HTMLInputElement>document.getElementById("save_button" + no)).style.display = "inline";
+
+    var name = (<HTMLInputElement>document.getElementById("name_row" + no));
+    var date = (<HTMLInputElement>document.getElementById("date_row" + no));
+    var stime = (<HTMLInputElement>document.getElementById("stime_row" + no));
+    var etime = (<HTMLInputElement>document.getElementById("etime_row" + no));
+
+    var name_data = name.innerHTML;
+    var date_data = date.innerHTML;
+    var stime_data = stime.innerHTML;
+    var etime_data = etime.innerHTML;
+
+    name.innerHTML = "<input type='text' id='name_text" + no + "' value='" + name_data + "'>";
+    date.innerHTML = "<input type='text' id='date_text" + no + "' value='" + date_data + "'>";
+    stime.innerHTML = "<input type='text' id='stime_text" + no + "' value='" + stime_data + "'>";
+    etime.innerHTML = "<input type='text' id='etime_text" + no + "' value='" + etime_data + "'>";
+  }
+
+  save_row(no: any){
+    var name_val=(<HTMLInputElement>document.getElementById("name_text"+no)).value;
+    var date_val=(<HTMLInputElement>document.getElementById("date_text"+no)).value;
+    var stime_val=(<HTMLInputElement>document.getElementById("stime_text"+no)).value;
+    var etime_val=(<HTMLInputElement>document.getElementById("etime_text"+no)).value;
+
+    (<HTMLInputElement>document.getElementById("name_row"+no)).innerHTML=name_val;
+    (<HTMLInputElement>document.getElementById("date_row"+no)).innerHTML=date_val;
+    (<HTMLInputElement>document.getElementById("stime_row"+no)).innerHTML=stime_val;
+    (<HTMLInputElement>document.getElementById("etime_row"+no)).innerHTML = etime_val;
+
+    (<HTMLInputElement>document.getElementById("save_button"+no)).style.display="none";
+    (<HTMLInputElement>document.getElementById("edit_button"+no)).style.display="inline";
+  }
+
+  delete_row(no: any,it_name: any){
+    (<HTMLInputElement>document.getElementById("row"+no+"")).outerHTML="";
+    this.itemList.filter(function(el){
+      return el.name !== it_name;
+    });
+  }
   getAllValue(){
     this.showAllTable= true;
     this.showTable= false;
     this.itemList = this.itemList
   }
 
-  proceed(){
-    this. confirmation = true;
-  }
-
-
-  cancel(){
-      alert("Oreder Cancelled");
-      this.router.navigate(['/login'])
-  }
-
-  continue(){
-    alert("Oreder Continue");
-    this.router.navigate(['/login'])
-  }
-
   popup(){
     alert("This tool is to Watch the scheduled Interview of the candidate or Schedule the Interview")
   }
 
-  save(){
+  savedata(){
     var userdata = (<HTMLInputElement>document.getElementById('nameInput')).value;
     var dateT = (<HTMLInputElement>document.getElementById('dateVal')).value;
     var s_time = (<HTMLInputElement>document.getElementById('starttime')).value;
@@ -147,9 +197,6 @@ export class OrderComponent implements OnInit {
     var e_slot =(<HTMLInputElement>document.getElementById('e')).value;
     var new_end_slot = e_time +" "+ ((e_slot == '1') ? 'AM' : 'PM' )
     console.log(userdata,dateT,s_time,s_slot,e_time,e_slot)
-    // if(userdata && dateT && s_time && s_slot && e_time && e_time){
-    //   (<HTMLInputElement>document.getElementById("myBtn")).disabled = false;
-    // }
     if(!userdata||!dateT||!s_time||!e_time){
       alert("Incomplete Data");
       this.add=false;
@@ -167,6 +214,7 @@ export class OrderComponent implements OnInit {
         this.add = true;
       }
     })}
+
     if(this.add){
       this.itemList.push({
         name: userdata,

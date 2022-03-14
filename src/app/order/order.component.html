@@ -16,10 +16,10 @@
         <div class='navbar'>
             <span itemprop='name'>CANDIDATE SEARCH</span>
         </div>
-        <select #mySelect id="Item" name="Item" required placeholder="Select" (change)='updateValue(mySelect.value)'>
+        <select #mySelect id="mySelect" id="Item" name="Item" required placeholder="Select" (change)='updateValue(mySelect.value)'>
           <option hidden [value]=""  selected>Select one category </option>
           <option *ngFor="let item of itemList" [value]="item.name">{{item.name}}</option>
-      </select>
+        </select>
     <button  class="btn" (click)="getAllValue()">Show All Schedule</button>
     </nav>
     </div>
@@ -30,12 +30,18 @@
         <th>Inteview Date</th>
         <th>Start Time</th>
         <th>End Time</th>
+        <th>Edit</th>
       </tr>
-      <tr *ngFor="let i of NewItem">
-        <td>{{i.name}}</td>
-        <td>{{i.date}}</td>
-        <td>{{i.start}}</td>
-        <td>{{i.end}}</td>
+      <tr *ngFor="let i of NewItem" id="row">
+        <td id="name_row">{{i.name}}</td>
+        <td id="date_row">{{i.date}}</td>
+        <td id="stime_row">{{i.start}}</td>
+        <td id="etime_row">{{i.end}}</td>
+        <td>
+          <input type="button" id="edit_button" value="Edit" class="edit" (click)="edit()">
+          <input style="display: none;" type="button" id="save_button" value="Save" class="save" (click)="save()">
+          <input type="button" value="Delete" class="delete" (click)="delete()">
+        </td>
       </tr>
     </table>
     </div>
@@ -47,43 +53,48 @@
           <th>Start Time</th>
           <th>End Time</th>
         </tr>
-        <tr *ngFor="let i of itemList">
-          <td>{{i.name}}</td>
-          <td>{{i.date}}</td>
-          <td>{{i.start_time}}</td>
-          <td>{{i.end_time}}</td>
+        <tr *ngFor="let i of itemList" id="row{{i}}">
+          <td id="name_row{{i}}">{{i.name}}</td>
+          <td id="date_row{{i}}">{{i.date}}</td>
+          <td id="stime_row{{i}}">{{i.start_time}}</td>
+          <td id="etime_row{{i}}">{{i.end_time}}</td>
+          <td>
+            <input type="button" id="edit_button{{i}}" value="Edit" class="edit" (click)="edit_row(i)">
+            <input style="display: none;" type="button" id="save_button{{i}}" value="Save" class="save" (click)="save_row(i)">
+            <input type="button" value="Delete" class="delete" (click)="delete_row(i,i.name)">
+          </td>
         </tr>
       </table>
       </div>
 
-    <div class="box">
-      <h1> Schedule an Interview</h1>
-      <div>
-        <label>Candidate Name:</label>
-      <input id="nameInput" value="" type="namevalue" style="margin-left: 0px"><br/>
-      <!-- <label>Date:</label>
-      <input id="dateVal"  value="" type="datevalue"><br/> -->
-      <label for="InterviewDate">Date:</label>
-      <input type="date" id="dateVal" name="iDate" min="{new Date().toISOString().split('T')[0]}" style="margin-left: 86px;"><br/>
-      <label>Start Time:</label>
-      <input id="starttime"  value="1" type="number" name="startvalue"
-       min="1" max="12" style="margin-left: 42px">
-      <select id="s" >
-        <option value="1">AM</option>
-        <option value="2">PM</option>
-    </select>
-    <br/>
-    <label>End Time:</label>
-    <input id="endtime" type="number"  value="2" name="endvalue"
-    min="1" max="12" style="margin-left: 52px">
-      <select id="e"  value="">
-        <option value="1">AM</option>
-        <option value="2">PM</option>
-    </select>
-    <br/>
+      <div class="box">
+        <h1> Schedule an Interview</h1>
+        <div>
+          <label>Candidate Name:</label>
+        <input id="nameInput" value="" type="namevalue" style="margin-left: 0px"><br/>
+        <!-- <label>Date:</label>
+        <input id="dateVal"  value="" type="datevalue"><br/> -->
+        <label for="InterviewDate">Date:</label>
+        <input type="date" id="dateVal" name="iDate" min="{new Date().toISOString().split('T')[0]}" style="margin-left: 86px;"><br/>
+        <label>Start Time:</label>
+        <input id="starttime"  value="1" type="number" name="startvalue"
+         min="1" max="12" style="margin-left: 42px">
+        <select id="s" >
+          <option value="1">AM</option>
+          <option value="2">PM</option>
+      </select>
+      <br/>
+      <label>End Time:</label>
+      <input id="endtime" type="number"  value="2" name="endvalue"
+      min="1" max="12" style="margin-left: 52px">
+        <select id="e"  value="">
+          <option value="1">AM</option>
+          <option value="2">PM</option>
+      </select>
+      <br/>
+        </div>
+        <button class="btn1" (click)="save()">Schedule Interview</button>
       </div>
-      <button class="btn1" (click)="save()">Schedule Interview</button>
-    </div>
 </div>
 </div>
 </div>
