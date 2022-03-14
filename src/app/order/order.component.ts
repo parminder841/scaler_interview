@@ -1,10 +1,6 @@
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from '../order.service';
-import { CustomMaterialModule } from '../material.module';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-order',
@@ -34,45 +30,30 @@ export class OrderComponent implements OnInit {
       name: 'Ajay',
       date: '2022-03-13',
       start_time: '1 PM',
-      end_time: '3 PM'
+      end_time: '2 PM'
     },
     {
       name: 'Neha',
       date: '2022-03-13',
-      start_time: '1 PM',
+      start_time: '2 PM',
       end_time: '3 PM'
     },
     {
       name: 'Pulkit',
-      date: '2022-03-13',
-      start_time: '2 PM',
+      date: '2022-03-14',
+      start_time: '3 PM',
       end_time: '4 PM'
     }
   ]
   buttonSelect: any;
   labelName: any
-  text ="you will recive an email confirmation shortly to jack.linder@gmail.com including product details."
-  textnew ="estimated delivery on 15 JUL,2020"
-  share ="share on social"
-  constructor( public service : OrderService,private router: Router,private activatedRoute: ActivatedRoute, private dialog: MatDialog) { }
+  constructor( public service : OrderService,private router: Router) { }
 
   ngOnInit() {
-    this.getList();
-    //  var dtToday = new Date();
-    //   var month = dtToday.getMonth() + 1;
-    //   var day = dtToday.getDate();
-    //   var year = dtToday.getFullYear();
-    //   (<HTMLInputElement>document.getElementById('dateVal'))?.attributes('min', maxDate);
-
-     (<HTMLInputElement>document.getElementById('dateVal')).valueAsDate = new Date();
+    (<HTMLInputElement>document.getElementById('dateVal')).valueAsDate = new Date();
   }
 
-  getList() {
-    this.service.getDetail().subscribe(res => {
-      console.log(res);
-    })
-  }
-
+  
   selectedTabValue(event: any){
     console.log(event);
     this.labelName = event.tab.textLabel;

@@ -10,15 +10,13 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { OrderComponent } from './order/order.component';
 import { OrderService } from './order.service';
 import { HttpClientModule } from '@angular/common/http';
-import { CandidateComponent } from './candiadate/candidate.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    OrderComponent,
-    CandidateComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

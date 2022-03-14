@@ -17,8 +17,6 @@ export class OrderService {
 
   getAllOrder() {
     let routeUrl: string;
-    // routeUrl = './assets/mockData/GetOrder.json'
-    //     return this.http.get(routeUrl);
 
   }
 

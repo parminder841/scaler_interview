@@ -22,8 +22,4 @@ export class LoginComponent implements OnInit {
         alert("Invalid credentials");
       }
     }
-
-    signup(){
-      alert("sign up")
-    }
   }

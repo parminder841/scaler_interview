@@ -14,10 +14,6 @@ const routes: Routes = [
     component : LoginComponent
   },
   {
-    path: 'candidate',
-    component: OrderComponent
-  },
-  {
     path: 'order',
     component: OrderComponent
   }
